@@ -16,7 +16,7 @@ services:
         build: ./server
         image: server:v1.0
         volumes:
-          - ./projects/:/var/www
+          - ../projects/:/var/www
         ports:
           - 80:80
           - 443:443
@@ -30,6 +30,9 @@ services:
         ports:
           - "27017:27017"
         command: --smallfiles --rest
+        environment:
+            MONGODB_USER: root
+            MONGODB_PASS: secret
 
     pma:
         image: phpmyadmin/phpmyadmin
