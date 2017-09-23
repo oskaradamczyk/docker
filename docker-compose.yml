@@ -5,19 +5,18 @@ services:
         image: mysql:latest
         environment:
           - MYSQL_ROOT_PASSWORD=secret
-          - MYSQL_DATABASE=merling
-          - MYSQL_USER=mering_admin
+          - MYSQL_USER=root
           - MYSQL_PASSWORD=secret
         volumes:
           - ./db:/var/lib/mysql
         ports:
           - 3307:3306
 
-    merling:
+    php:
         build: ./server
-        image: merling:v1.0
+        image: php:v1.0
         volumes:
-          - ../:/var/www
+          - ./projects/:/var/www
         ports:
           - 81:80
           - 444:443
@@ -31,3 +30,14 @@ services:
         ports:
           - "27018:27017"
         command: --smallfiles --rest
+
+    pma:
+        image: phpmyadmin/phpmyadmin
+        ports:
+            - 8080:80
+        links:
+            - mysql
+        environment:
+            PMA_HOST: mysql
+        volumes:
+            - ./pma/config.user.inc.php:/etc/phpmyadmin/config.user.inc.php
