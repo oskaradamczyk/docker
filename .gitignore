@@ -1,0 +1,10 @@
+# MongoDB large files
+/mongo/*
+!/mongo/.gitkeep
+
+# Mysql structure
+/mysql/*
+!/mysql/.gitkeep
+
+# PS files
+/.idea/
