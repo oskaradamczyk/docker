@@ -5,7 +5,6 @@ services:
         image: mysql:latest
         environment:
           - MYSQL_ROOT_PASSWORD=secret
-          - MYSQL_USER=root
           - MYSQL_PASSWORD=secret
         volumes:
           - ./mysql:/var/lib/mysql
@@ -31,8 +30,8 @@ services:
           - "27017:27017"
         command: --smallfiles --rest
         environment:
-            MONGODB_USER: root
-            MONGODB_PASS: secret
+          - MONGO_INITDB_ROOT_USERNAME=root
+          - MONGO_INITDB_ROOT_PASSWORD=secret
 
     pma:
         image: phpmyadmin/phpmyadmin
